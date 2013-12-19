@@ -1,5 +1,0 @@
-"Rule: ocaml: ml & cmi -> cmx & o (%=7 )": "W,\184\161\142\252*x\177\151\026(\213\194SX"
-"Rule: ocaml: ml -> cmo & cmi (%=7 )": "\189\228@Dn\127:lw\179,\178\207\131j#"
-"Rule: ocaml: cmx* & o* -> native (%=7 )": "\147&\016\243\253\157`9M%\240\246\149\1505\004"
-"Resource: /home/xinuo/Documents/ocaml/euler/7.ml": "\245\189O\131\209Wxc\006\186\181\174\193zO\191"
-"Rule: ocaml dependencies ml (%=7 )": "\150\140\160b\192|x\003\236~\142\173\007W\148\245"
