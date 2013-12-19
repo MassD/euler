@@ -1,0 +1,20 @@
+### Starting build.
+# Target: 7.ml.depends, tags: { extension:ml, file:7.ml, ocaml, ocamldep, quiet }
+/home/xinuo/.opam/4.01.0/bin/ocamldep.opt -modules 7.ml > 7.ml.depends
+# Target: 7.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:7.cmo, file:7.ml, implem, ocaml, quiet }
+/home/xinuo/.opam/4.01.0/bin/ocamlc.opt -c -o 7.cmo 7.ml
++ /home/xinuo/.opam/4.01.0/bin/ocamlc.opt -c -o 7.cmo 7.ml
+File "7.ml", line 1:
+Warning 24: bad source file name: "7" is not a valid module name.
+File "7.ml", line 27, characters 6-7:
+Warning 26: unused variable r.
+# Target: 7.cmx, tags: { compile, extension:cmx, extension:ml, file:7.cmx, file:7.ml, implem, native, ocaml, quiet }
+/home/xinuo/.opam/4.01.0/bin/ocamlopt.opt -c -o 7.cmx 7.ml
++ /home/xinuo/.opam/4.01.0/bin/ocamlopt.opt -c -o 7.cmx 7.ml
+File "7.ml", line 1:
+Warning 24: bad source file name: "7" is not a valid module name.
+File "7.ml", line 27, characters 6-7:
+Warning 26: unused variable r.
+# Target: 7.native, tags: { dont_link_with, extension:native, file:7.native, link, native, ocaml, program, quiet }
+/home/xinuo/.opam/4.01.0/bin/ocamlopt.opt 7.cmx -o 7.native
+# Compilation successful.
