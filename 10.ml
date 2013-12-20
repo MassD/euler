@@ -34,11 +34,33 @@ let sieve_sum_prime n =
   ) markers;
   markers.(n-2)
 
+let sieve_sum_prime' n =
+  let markers = Array.make (n-1) 0 in
+  markers.(n-2) <- 2;
+  let rec mark num i =
+    if i < n-2 then (markers.(i) <- 1; mark num (i+num))
+    else ()
+  in
+  let rec sieve num =
+    if num > n then ()
+    else ( 
+      if markers.(num-2) = 0 then (mark num (2*num-2); markers.(n-2) <- markers.(n-2)+num)
+      else ();
+      sieve (num+2)
+    )
+  in 
+  sieve 3;
+  markers.(n-2)
+
+
 let _ =
-  let s1 = Sys.time() in
-  let r1 = sum_prime 2000000 in
+  (*let s1 = Sys.time() in
+  let r1 = sum_prime 2000000 in*)
   let e1 = Sys.time() in 
   let r2 = sieve_sum_prime 2000000 in
   let e2 = Sys.time() in
-  Printf.printf "Brute-force answer: %d, cost %f ms\n" r1 (1000.*.(e1 -.s1));
-  Printf.printf "Clever answer: %d, cost %f ms\n" r2 (1000.*.(e2 -. e1));
+  (*let r3 = sieve_sum_prime' 2000000 in
+  let e3 = Sys.time() in*)
+  (*Printf.printf "Brute-force answer: %d, cost %f ms\n" r1 (1000.*.(e1 -.s1));*)
+  Printf.printf "Sieve answer: %d, cost %f ms\n" r2 (1000.*.(e2 -. e1));
+  (*Printf.printf "Sieve' answer: %d, cost %f ms\n" r3 (1000.*.(e3 -. e2))*)
