@@ -12,9 +12,9 @@ let num_div n =
 
 let rec over_500_div i =
   let tn = i*(i+1)/2 in
-  (*let sqrt_tn = int_of_float (sqrt (float_of_int tn)) in*)
-  if (*tn = sqrt_tn * sqrt_tn &&*) num_div tn > 500 then
-    tn, (num_div tn)
+  let nd = num_div tn in
+  if nd > 500 then
+    tn, nd
   else over_500_div (i+1)
 
 let _ =
