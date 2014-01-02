@@ -11,37 +11,29 @@ let read_file filename =
 
 let str_to_num_list s = Str.split (Str.regexp_string " ") s |> List.map int_of_string |> Array.of_list
 
-let num_tri_ary = List.map str_to_num_list |> Array.of_list
+let num_tri l = List.map str_to_num_list l |> Array.of_list
 
-let left_lean_sum_ary nta =
-  let h = Array.length nta in
-  let a = Array.make_matrix h h 0 in
-  let rec diag_sum i j sum =
-    a.(i).(j) <- nta.(
-  for i = 0 to h-1 do
-    
+let max x y = if x > y then x else y
 
 let max_sum nt =
-  let max = ref 0 in
-  let rec level_loop ci sum = function
-    | [] -> if sum > !max then max:=sum else ()
-    | a::tl -> (
-      level_loop ci (sum+a.(ci)) tl;
-      if ci+1 < Array.length a then level_loop (ci+1) (sum+a.(ci+1)) tl
-      else ()
+  let rec from_bottom i j =
+    if i = 0 then nt.(0).(0)
+    else if j = i then from_bottom (i-1) 0
+    else (
+      nt.(i-1).(j) <- nt.(i-1).(j)+(max nt.(i).(j) nt.(i).(j+1));
+      from_bottom i (j+1)
     )
-  in level_loop 0 0 nt;
-  !max
+  in 
+  from_bottom ((Array.length nt)-1) 0
 
-(*
 let _ =
   let t1 = Sys.time() in
-  let small = read_file "./triangle_small.txt" |> num_tri_ary |> max_sum in
+  let small = read_file "./triangle_small.txt" |> num_tri |> max_sum in
   let t2 = Sys.time() in
-  Printf.printf "small = %d, cost %f sec" small (t2-.t1);
-  let large = read_file "./triangle.txt" |> num_tri_ary |> max_sum in
+  Printf.printf "small = %d, cost %f sec\n" small (t2-.t1);
+  let large = read_file "./triangle.txt" |> num_tri |> max_sum in
   let t3 = Sys.time() in
-  Printf.printf "large = %d, cost %f sec" large (t3-.t2);
-*)
+  Printf.printf "large = %d, cost %f sec\n" large (t3-.t2);
+
   
   
