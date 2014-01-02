@@ -2,8 +2,10 @@ let div_sum n =
   let sqrtn = int_of_float (sqrt (float_of_int n)) in
   let rec ds i sum =
     if i > sqrtn then sum
-    else if n mod i = 0 && i = sqrtn then ds (i+1) sum+i
-    else if n mod i = 0 && i <> sqrtn then ds (i+1) sum+i+(n/i)
+    else if n mod i = 0 then (
+      if i*i = n then ds (i+1) sum+i
+      else ds (i+1) sum+i+(n/i)
+    )
     else ds (i+1) sum
   in 
   (false, ds 2 1)
