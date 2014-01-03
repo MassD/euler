@@ -1,0 +1,246 @@
+﻿.topbar .topbar-icon.icon-winterbash {
+    width: 36px;
+    background-position: 11px 9px;
+    background-image: url(../img/topbar-snowflake.png) !important;
+    background-size: 14px;
+}
+@media only screen and (-moz-min-device-pixel-ratio: 1.5),
+       only screen and (-o-min-device-pixel-ratio: 3/2),
+       only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5) {
+    .topbar .topbar-icon.icon-winterbash {
+        background-image: url(../img/topbar-snowflake-retina.png) !important;
+    }
+}
+.icon-winterbash.wb-open, .icon-winterbash.wb-open:hover {
+    background-color: #00d1ca;
+}
+.icon-winterbash .wb-unread-count {
+    margin-top: 9px;
+    color: #fff;
+    text-indent: 0;
+    border-radius: 2px;
+    padding: 1px 4px;
+    font-size: 11px;
+    line-height: 1;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    background-color: #00d1ca;
+    display: none;
+}
+/*popups*/
+.wb-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.wb-popup {
+    width: 811px;
+    min-height: 180px;
+    z-index: 1001;
+    background-color: #00d1ca;
+    position: absolute;
+    display: none;
+    border: 3px solid #00d1ca;
+}
+.wb-popup-header {
+    height: 70px;
+    background-image: url(../img/sprite-hat-picker.png);
+    position: relative;
+}
+.wb-popup-title {
+    position: absolute;
+    color: white;
+    font-family: arial;
+    font-size: 18px;
+    top: 15px;
+    left: 15px;
+}
+.wb-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background-image: url(../img/sprite-hat-picker.png);
+    background-position: -831px -2px;
+    cursor: pointer;
+}
+.wb-popup-content {
+    padding: 15px;
+    text-align: left;
+    font-size: 12px;
+    color: black;
+    background: white;
+    min-height: 380px;
+}
+
+/* hat rack */
+.wb-outer {
+    width: 50px;
+    height: 50px;
+    margin-left: 7px;
+    float: left;
+    font-size:8px;
+    color:#808080;
+    text-align:center;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.wb-outer:hover {
+    border-color: #dedede;
+}
+#wb-hat-rack .wb-separator {
+    height: 5px;
+    clear: both;
+    padding: 15px 0;
+    background: url(../img/bg-snowflake.png) 0 6px;
+}
+#wb-hat-rack .wb-selected {
+    border-color: #FF467D;
+}
+#wb-hat-rack .wb-wearing {
+    background-color: #dedede;
+}
+#wb-hat-rack .wb-wearing:hover {
+    border-color: #d0d0d0;
+}
+.wb-hat-details {
+    width: 174px;
+    margin-left: 40px;
+    background: white;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    color: #808080;
+}
+.wb-hat-details button, button#wb-join {
+    background-color: #ff467d;
+    color: white;
+    padding: 6px 0;
+    margin: 0;
+    font-size: 14px;
+    border: none;
+    width: 128px;
+    cursor: pointer;
+}
+.wb-hat-details button:hover {
+    background-color: #ff7fa5;
+}
+#wb-only-here {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+#wb-hat-details-info {
+    min-height: 155px;
+    margin: 10px 0;
+    width: 128px;
+}
+#wb-hat-details-info p {
+    margin-bottom: 20px;
+}
+.wb-hat-detail-description {
+    font-style: italic;
+}
+#wb-hat-details-info h3 {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    color: #00d1ca;
+}
+.wb-rack {
+    width: 567px;
+    display: inline-block;  
+    padding-bottom: 40px;
+}
+.wb-rack .wb-bottom {
+    padding: 15px 0 0; 
+    position: absolute;
+    bottom: 20px;
+}
+
+a.wb-hat-details-avatar {
+    margin-top: 45px;
+    display: block;
+    width: 128px;
+    height: 128px;
+}
+#wb-hat-details-display {
+    padding-top: 15px; /* padding not margin to prevent collapsing with the >div*/
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2;
+    width: 128px;
+    height: 128px;
+}
+#wb-hat-details-display > div {
+    margin: 0 auto; /* top will be set in JS */
+}
+.wb-favicon {
+    width:16px;
+    height: 16px;
+    margin: 5px 2px 5px 0;
+}
+/* inbox */
+.topbar-dialog.wb-inbox-dialog {
+    width: 375px;
+    border-color: #00d1ca;
+}
+.wb-inbox-dialog .header {
+    background-image: url(../img/sprite-hat-picker.png);
+    height: 35px;
+    background-size: cover;
+    background-color: #00d1ca;
+}
+.wb-inbox-dialog .wb-footer {
+    padding: 10px 8px;
+    background-color: #00d1ca;
+    color: white;
+}
+.wb-inbox-dialog .header a, .wb-footer a {
+    color: white!important;
+}
+.wb-inbox-dialog .header a:hover, .wb-footer a:hover {
+    color: #ffafd5!important;
+}
+.wb-inbox-dialog .modal-content > p {
+    margin-top: 15px;
+    line-height: 1.3;
+}
+#wb-join {
+    display: block;
+    margin: 0 auto;
+}
+.wb-inbox-item {
+    border-bottom: 1px solid #f3f3f3;
+    padding: 0;
+}
+.wb-inbox-item:last-child {
+    border: none!important;
+}
+.wb-new {
+    background-color: #FFFFE2;
+}
+
+.wb-inbox-item > a > * {
+    display: inline-block!important;
+    vertical-align: middle!important;
+    margin-right: 12px!important;
+}
+.wb-inbox-item > a > p {
+    color: #888;
+    font-size: 11px;
+    width: 277px;
+    margin: 0!important;
+}
+.wb-inbox-item .wb-hat-holder {
+    width: 16px;
+}
+.wb-inbox-item .wb-hat-holder > div {
+    margin: 0 auto;
+}
+

@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<!-- saved from url=(0117)http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31359504_20662171 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/beacon.js"></script>
+    
+    <title>algorithm - Find the kth eleven-non-free number - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com">
+    <meta name="og:type" content="website">
+    <meta name="og:image" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=fde65a5a78c6">
+    <meta name="og:title" content="Find the kth eleven-non-free number">
+    <meta name="og:description" content="Let&#39;s define eleven-non-free numbers:
+
+If we consider a number as a string, then if any substring inside is a (non-zero) power of 11, then this number is an eleven-non-free number.
+
+For example, 11...">
+    <meta name="og:url" content="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number">
+    <link rel="canonical" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number">
+
+    
+    
+    <script type="text/javascript" async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/ados"></script><script async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/beacon.js"></script><script type="text/javascript" async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/ga.js"></script><script type="text/javascript" async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/quant.js"></script><script type="text/javascript" async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/ados.js"></script><script type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/stub.en.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/all.css">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Find the kth eleven-non-free number&#39;" href="http://stackoverflow.com/feeds/question/20662171">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({canOpenBounty:true,votesCast:[],canViewVoteCounts:true,totalCommentCount:20,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:20662171});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '20662171');
+            
+                    });
+    </script>
+
+            <script type="text/javascript">
+                StackExchange.ready(function () {
+                    var d = 100;
+                    $.ajax({url:"//cdn-prom.sstatic.net/WinterBash2013/js/core.js?28",cache:true,dataType:"script"}).done(function tryInit() {
+                        if (window.WinterBash) {
+                            WinterBash.core.init('winterbash2013.stackexchange.com', '//cdn-prom.sstatic.net/WinterBash2013/');
+                        } else {
+                            if (d <= 800)
+                                setTimeout(tryInit, d);
+                            d *= 2;
+                        }
+                    });
+                });
+            </script>
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('1');
+                            StackExchange.realtime.subscribeToTopBarNotifications('1');
+        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1388705877,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","nonAsciiTags":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"e2219d1c297a3f779f90227c1e0e54d6","isRegistered":true,"userType":3,"userId":759076,"accountId":395885,"gravatar":"<div class=\"gravatar-wrapper-32\"><img src=\"http://www.gravatar.com/avatar/21e1ea4b676cb9f94f4107fd470fa2d9?s=128&d=identicon&r=PG\" alt=\"\"></div>","profileUrl":"http://stackoverflow.com/users/759076/jackson-tale","notificationsUnviewedCount":0,"inboxUnviewedCount":0,"ab":{"welcome_email":{"v":"a","g":2}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"f24049d774be","js/full-anon.en.js":"2902a23ad46f","js/full.en.js":"c63381338a59","js/wmd.en.js":"849f408083f3","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"038b38e68e1a","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"6f8a95d5c039"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+<script async="" type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/full.en.js"></script><script async="" type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/post-validation.en.js"></script><script async="" type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/prettify-full.en.js"></script><script async="" type="text/javascript" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/wmd.en.js"></script><link rel="stylesheet" type="text/css" href="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/wb-include.css"><link href="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/sidebar.min.css" type="text/css" rel="stylesheet"></head>
+<body class="question-page new-topbar">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+<div class="topbar">
+    <div class="topbar-wrapper">
+        
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="http://stackexchange.com/sites">Explore our sites</a></h3>
+    </div>
+    <div class="modal-content">
+        <ul class="current-site">
+                <li>
+                        <a href="http://stackoverflow.com/" class="current-site-link site-link js-site-link js-gps-track" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+    <div class="related-links js-related-links">
+            <a href="http://chat.stackoverflow.com/" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+                    <a href="http://blog.stackexchange.com/" data-gps-track="site_switcher.click({ item_type:7 })">blog</a>
+                    <a href="http://stackoverflow.com/users/logout" data-gps-track="site_switcher.click({ item_type:8 })">log out</a>
+    </div>
+
+                </li>
+                <li class="related-site">
+                        <a href="http://meta.stackoverflow.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:4, item_type:3 });site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                        <a href="http://meta.stackoverflow.com/users/185653" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:4, item_type:6 });site_switcher.click({ item_type:5 })">
+        101
+    </a>
+
+                </li>
+                            <li class="related-site">
+                    <a class="site-link js-site-link" href="http://careers.stackoverflow.com/" data-gps-track="site_switcher.click({ item_type:9 })">
+                        <div class="site-icon favicon favicon-careers" title="Stack Overflow Careers"></div>
+                        Careers 2.0
+                    </a>
+                </li>
+        </ul>
+        
+
+
+            <ul>
+                    <li>
+                            <a href="http://math.stackexchange.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:69, item_type:3 });site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-math" title="Mathematics"></div>
+        Mathematics
+    </a>
+
+                            <a href="http://math.stackexchange.com/users/23062" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:69, item_type:6 });site_switcher.click({ item_type:5 })">
+        125
+    </a>
+
+                    </li>
+                    <li>
+                            <a href="http://askubuntu.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:89, item_type:3 });site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-askubuntu" title="Ask Ubuntu"></div>
+        Ask Ubuntu
+    </a>
+
+                            <a href="http://askubuntu.com/users/168055" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:89, item_type:6 });site_switcher.click({ item_type:5 })">
+        101
+    </a>
+
+                    </li>
+                    <li>
+                            <a href="http://tex.stackexchange.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:85, item_type:3 });site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-tex" title="TeX - LaTeX"></div>
+        TeX - LaTeX
+    </a>
+
+                            <a href="http://tex.stackexchange.com/users/38811" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:85, item_type:6 });site_switcher.click({ item_type:5 })">
+        101
+    </a>
+
+                    </li>
+                    <li>
+                            <a href="http://cstheory.stackexchange.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:114, item_type:3 });site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-cstheory" title="Theoretical Computer Science"></div>
+        Theoretical Computer Science
+    </a>
+
+                            <a href="http://cstheory.stackexchange.com/users/9425" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:114, item_type:6 });site_switcher.click({ item_type:5 })">
+        101
+    </a>
+
+                    </li>
+                    <li>
+                            <a href="http://unix.stackexchange.com/" class="site-link js-site-link js-gps-track" data-gps-track="site.switch({ target_site:106, item_type:3 });site_switcher.click({ item_type:1 })">
+        <div class="site-icon favicon favicon-unix" title="Unix &amp; Linux"></div>
+        Unix &amp; Linux
+    </a>
+
+                            <a href="http://unix.stackexchange.com/users/30324" class="rep-score js-related-links js-gps-track" data-gps-track="site.switch({ target_site:106, item_type:6 });site_switcher.click({ item_type:5 })">
+        101
+    </a>
+
+                    </li>
+            </ul>
+        
+            <div class="child-content"></div>
+
+    </div>
+</div>        </div>
+
+        <div class="network-items">
+            
+            <a href="http://stackexchange.com/" class="topbar-icon icon-site-switcher js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 114 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+            
+                <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="topbar-icon icon-inbox js-inbox-button" title="Recent inbox messages">
+                    <span class="hidden-text">Inbox</span>
+                    <span class="unread-count" style="display:none"></span>
+                </a>
+                <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="topbar-icon icon-achievements js-achievements-button" data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+                    <span class="hidden-text">Reputation and Badges</span>
+                    <span class="unread-count" style="display:none">
+                        
+                    </span>
+                </a>
+        <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="topbar-icon icon-winterbash"><span class="wb-unread-count">5</span></a></div>
+
+        <div class="topbar-links">
+            
+                <a href="http://stackoverflow.com/users/759076/jackson-tale" class="profile-me">
+			        <div class="gravatar-wrapper-24" title="Jackson Tale"><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/21e1ea4b676cb9f94f4107fd470fa2d9" alt="" class="avatar-me js-avatar-me"></div>
+                    <div class="links-container topbar-flair">
+
+                        <span class="reputation" title="your reputation: 5,003">
+                            5,003
+                        </span>
+<span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="85 bronze badges"><span class="badge3"></span><span class="badgecount">85</span></span>                    </div>
+			    </a>
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+                        
+
+                        
+                            <a href="http://stackoverflow.com/review" title="Review queues - help improve the site">
+                                review
+                            </a>
+                        
+
+                            <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="icon-help js-help-button" title="Help Center and other resources">
+                                help
+                                <span class="triangle"></span>
+                            </a>
+                            <div class="topbar-dialog help-dialog js-help-dialog dno">
+                                <div class="modal-content">
+                                    <ul>
+                                        <li>
+                                            <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                                                Tour
+                                                <span class="item-summary">
+                                                    Start here for a quick overview of the site
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                                                Help Center
+                                                <span class="item-summary">
+                                                    Detailed answers to any questions you might have
+                                                </span>
+                                            </a>
+                                        </li>
+                                            <li>
+                                                <a href="http://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                                    Meta
+                                                    <span class="item-summary">
+                                                        Discuss the workings and policies of this site
+                                                    </span>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        
+                    </span>
+                </div>
+
+			<div class="search-container">
+                <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+			</div>
+            	
+        </div>      
+    </div> 
+</div>
+<script>
+    StackExchange.ready(function () {
+        //topbar.init();
+        StackExchange.topbar.init();
+    });
+</script>    <div class="container">
+        <div id="header">
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs ">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                            <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                            <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                            <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope="" itemtype="http://schema.org/Article">
+	<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+			<div id="question-header">
+			<h1 itemprop="name"><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number" class="question-hyperlink">Find the kth eleven-non-free number</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="20662171" id="question">
+    
+        <input type="hidden" id="20662171-only-allow-inform-moderator-flagging" value="true">
+        <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20662171">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">12</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>5</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Let's define <code>eleven-non-free</code> numbers:</p>
+
+<p>If we consider a number as a string, then if any substring inside is a (non-zero) power of <code>11</code>, then this number is an <code>eleven-non-free</code> number.</p>
+
+<p>For example, <code>1123</code> is an <code>eleven-non-free</code> number as <code>11</code> inside is <code>11^1</code>. Also <code>12154</code> is one as <code>121</code> is <code>11^2</code>. But <code>12345</code> is not, because we can't find any <em>non-zero power of <code>11</code></em> inside.</p>
+
+<p>So given a k, find the kth <code>eleven-non-free</code> number. For example the 13th such number is <code>211</code>.</p>
+
+<p>I don't know how to efficiently do it. the brute-force way is to increase i from 1 and check every number and count until the kth. </p>
+
+<p>I guess we should consider strings with different length (1, 2, 3, 4, ...). then for each length, we try to fill in 11, 11^2, 11^3, etc and try to get all the combinations. </p>
+
+<p>But it seems quite complicated as well.</p>
+
+<p>Anyone?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a> <a href="http://stackoverflow.com/questions/tagged/data-structures" class="post-tag" title="show questions tagged &#39;data-structures&#39;" rel="tag">data-structures</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/20662171/759076" title="short permalink to this question" class="short-link" id="link-post-20662171">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20662171/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="close-question-link" title="vote to close this question (when closed, no new answers can be added)" data-questionid="20662171" data-isclosed="false">close</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" id="delete-post-20662171" title="vote to delete this post" class="" data-delete-prompt="Delete this post?" data-undelete-prompt="Undelete this post?">delete</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20662171">flag</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20662171/revisions" title="show all edits to this post">edited <span title="2013-12-18 15:41:56Z" class="relativetime">Dec 18 '13 at 15:41</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/476803/chris"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/a0957a413376168de79465b341c768d5" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/476803/chris">chris</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,473</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info user-hover">
+    <div class="user-action-time">
+        asked <span title="2013-12-18 15:32:42Z" class="relativetime">Dec 18 '13 at 15:32</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/759076/jackson-tale"><div class="gravatar-wrapper-32"><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/21e1ea4b676cb9f94f4107fd470fa2d9" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/759076/jackson-tale">Jackson Tale</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,003</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="85 bronze badges"><span class="badge3"></span><span class="badgecount">85</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20662171" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="15" data-addlink-html="add comment" data-addlink-disabled="false">           
+    <tr id="comment-30935118" class="comment" data-commentid="30935118">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of &#39;useful comment&#39; votes received" class="cool">3</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Have you written any code to try to solve this? Also, I'm not opposed to purely academic questions, but you'd probably get more answers if you could describe a practical use for this.</span> –&nbsp;<a href="http://stackoverflow.com/users/1735262/iamnotmaynard" title="3135 reputation" class="comment-user">iamnotmaynard</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935118_20662171"><span title="2013-12-18 15:38:40Z" class="relativetime-clean">Dec 18 '13 at 15:38</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30935151" class="comment" data-commentid="30935151">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+</td>
+<td>
+&nbsp;
+</td></tr>
+</tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">@iamnotmaynard it is actually an mutation of <a href="http://projecteuler.net/problem=442" rel="nofollow">projecteuler.net/problem=442</a>. It is not necessarily an academic question, think of interview questions, many of them you will never need for practical</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935151_20662171"><span title="2013-12-18 15:39:23Z" class="relativetime-clean">Dec 18 '13 at 15:39</span></a></span><span class="edited-yes" title="this comment was edited"></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30935480" class="comment" data-commentid="30935480">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Your comment on strings of different length sounds about right. It will get complicated but I suspect if you try to just do it in ordered steps it shouldn't be too hard. Also I'm intrigued, is this just a theoretical exercise or do these eleven-non-free numbers have a purpose?</span> –&nbsp;<a href="http://stackoverflow.com/users/338068/chris" title="12919 reputation" class="comment-user">Chris</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935480_20662171"><span title="2013-12-18 15:46:55Z" class="relativetime-clean">Dec 18 '13 at 15:46</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30935527" class="comment" data-commentid="30935527">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">@JacksonTale: "think of <b>bad</b> interview questions that you will never need for practical purposes" - fixed it for you. ;-)</span> –&nbsp;<a href="http://stackoverflow.com/users/338068/chris" title="12919 reputation" class="comment-user">Chris</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935527_20662171"><span title="2013-12-18 15:47:48Z" class="relativetime-clean">Dec 18 '13 at 15:47</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30935529" class="comment" data-commentid="30935529">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@Chris it is a mutation of <a href="http://projecteuler.net/problem=442" rel="nofollow">projecteuler.net/problem=442</a></span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935529_20662171"><span title="2013-12-18 15:47:52Z" class="relativetime-clean">Dec 18 '13 at 15:47</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30935571" class="comment" data-commentid="30935571">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@Chris it depends really. For example, <b>bad</b> interview question like <code>how many windows in New York</code> has its purpose though not practical.</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935571_20662171"><span title="2013-12-18 15:48:59Z" class="relativetime-clean">Dec 18 '13 at 15:48</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30935623" class="comment" data-commentid="30935623">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">It's not much of a mutation: any way that you can efficiently find the nth <code>eleven-non-free</code> number will also be a way to find the nth <code>eleven-free-number</code>--just subtract the number of <code>eleven-non-free-numbers</code> from the total number you're at.</span> –&nbsp;<a href="http://stackoverflow.com/users/802500/justin-blank" title="516 reputation" class="comment-user">Justin Blank</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935623_20662171"><span title="2013-12-18 15:49:53Z" class="relativetime-clean">Dec 18 '13 at 15:49</span></a></span><span class="edited-yes" title="this comment was edited 2 times"></span></div></td>
+    </tr>
+           
+    <tr id="comment-30935629" class="comment" data-commentid="30935629">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Also if you have a solution to that problem then you presumably can trivially derive a solution to this one. And with respect to interview questions I would consider bad any question that is a test of something you are never going to have to do (or indeed do something of a similar sort).</span> –&nbsp;<a href="http://stackoverflow.com/users/338068/chris" title="12919 reputation" class="comment-user">Chris</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935629_20662171"><span title="2013-12-18 15:50:03Z" class="relativetime-clean">Dec 18 '13 at 15:50</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30935692" class="comment" data-commentid="30935692">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@JustinBlank true, I guess find the kth <code>element-non-free</code> is easier.</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935692_20662171"><span title="2013-12-18 15:51:24Z" class="relativetime-clean">Dec 18 '13 at 15:51</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30935712" class="comment" data-commentid="30935712">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@Chris No, I don't have solution for that problem. Instead, I guess solving the question here is the way to solve that one</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30935712_20662171"><span title="2013-12-18 15:52:01Z" class="relativetime-clean">Dec 18 '13 at 15:52</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30936142" class="comment" data-commentid="30936142">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">I would probably take the opposite approach from your brute force idea. It's still brute force, but it's easier to exploit certain symmetries. Start with a large bitmap with each bit representing an integer (e.g. using a 64KB chunk of memory to represent the first 512K integers). Set all bits to 1, then start turning off the bits that are not eleven-non-free - i.e. 11, 110-119, 211, 311, 411, etc... Then 121, 1210-1219, 2121, 3121, 4121, ....</span> –&nbsp;<a href="http://stackoverflow.com/users/1253222/twalberg" title="14596 reputation" class="comment-user">twalberg</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936142_20662171"><span title="2013-12-18 16:01:45Z" class="relativetime-clean">Dec 18 '13 at 16:01</span></a></span><span class="edited-yes" title="this comment was edited"></span></div></td>
+    </tr>
+           
+    <tr id="comment-30936215" class="comment" data-commentid="30936215">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">I don't have an answer, and if I did, I'm not supposed to share. However, here's an observation I've been thinking about: 
+
+Consider a string like <code>123</code>, you can systematically find and count the number of ways to complete that into an <code>eleven-free</code> or <code>eleven-non-free</code> string. You can do that without directly enumerating them (or rather, you don't have to necessarily enumerate them for each starting string).</span> –&nbsp;<a href="http://stackoverflow.com/users/802500/justin-blank" title="516 reputation" class="comment-user">Justin Blank</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936215_20662171"><span title="2013-12-18 16:03:13Z" class="relativetime-clean">Dec 18 '13 at 16:03</span></a></span><span class="edited-yes" title="this comment was edited 2 times"></span></div></td>
+    </tr>
+           
+    <tr id="comment-30936241" class="comment" data-commentid="30936241">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@twalberg it is the similar idea as my intuition of string. But the problem is <code>1211</code> will be counted twice</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936241_20662171"><span title="2013-12-18 16:03:56Z" class="relativetime-clean">Dec 18 '13 at 16:03</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30936271" class="comment" data-commentid="30936271">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@JustinBlank Why you are not supposed to share?</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936271_20662171"><span title="2013-12-18 16:04:32Z" class="relativetime-clean">Dec 18 '13 at 16:04</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30936285" class="comment" data-commentid="30936285">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">@JacksonTale Yes, but if you've already turned the bit off, turning it off again isn't going to hurt anything. At the end you'll have a bitmap where each 1 represents one of the numbers you're looking for...</span> –&nbsp;<a href="http://stackoverflow.com/users/1253222/twalberg" title="14596 reputation" class="comment-user">twalberg</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936285_20662171"><span title="2013-12-18 16:04:56Z" class="relativetime-clean">Dec 18 '13 at 16:04</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30936352" class="comment" data-commentid="30936352">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@twalberg Maybe you can construct an answer out of your thoughts. I guess that will be more easily understandable for me.</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936352_20662171"><span title="2013-12-18 16:06:27Z" class="relativetime-clean">Dec 18 '13 at 16:06</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-30936577" class="comment" data-commentid="30936577">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Project Euler questions are supposed to be your own work. Publicly posting answers is discouraged. 
+
+Btw: thank you for posting this. I haven't done anything in Project Euler for awhile, and the &gt; 200 questions are usually too hard for me, but I think I can solve this one.</span> –&nbsp;<a href="http://stackoverflow.com/users/802500/justin-blank" title="516 reputation" class="comment-user">Justin Blank</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936577_20662171"><span title="2013-12-18 16:11:21Z" class="relativetime-clean">Dec 18 '13 at 16:11</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-30936628" class="comment" data-commentid="30936628">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@JustinBlank Yeah, I know. that's why I didn't directly ask tbh.</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30936628_20662171"><span title="2013-12-18 16:12:32Z" class="relativetime-clean">Dec 18 '13 at 16:12</span></a></span>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div></td>
+    </tr>
+           
+    <tr id="comment-31277931" class="comment" data-commentid="31277931">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Has anyone solved the 1 quintilian string interrogations part of the problem? :)</span> –&nbsp;<a href="http://stackoverflow.com/users/3034826/drankin2112" title="839 reputation" class="comment-user">drankin2112</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31277931_20662171"><span title="2013-12-31 02:39:21Z" class="relativetime-clean">2 days ago</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-31359504" class="comment" data-commentid="31359504">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">@Jackson Tale - You may have seen that I solved the Euler version of your question. I didn't post the answer to the problem specifically. But, I did post the working algorithm. Do you think I should remove the algorithm and only leave behind the conceptual information? Your input would be appreciated.</span> –&nbsp;<a href="http://stackoverflow.com/users/3034826/drankin2112" title="839 reputation" class="comment-user">drankin2112</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/algorithm - Find the kth eleven-non-free number - Stack Overflow.html"><span title="2014-01-02 23:34:47Z" class="relativetime-clean">4 mins ago</span></a></span></div></td>
+    </tr>
+           
+    <tr id="comment-31359607" class="comment" data-commentid="31359607">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@drankin2112 u mean you remove teh algorithm just incase projecteuler doesn't want answer to be public?</span> –&nbsp;<a href="http://stackoverflow.com/users/759076/jackson-tale" title="5003 reputation" class="comment-user owner">Jackson Tale</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31359607_20662171"><span title="2014-01-02 23:39:00Z" class="relativetime-clean">just now</span></a></span>&nbsp;<a class="comment-edit">edit</a>&nbsp;<a class="comment-delete delete-tag" title="delete this comment"></a></div><form id="edit-comment-31359607" class="dno"><div class="dno">@drankin2112 u mean you remove teh algorithm just incase projecteuler doesn't want answer to be public?</div></form></td>
+    </tr>
+</tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20662171" class="" data-placeholdertext="Use comments to reply to other users or notify them of changes. If you are adding new information, edit your post instead of commenting." style="display: none;"><table><tbody><tr><td><ul id="tabcomplete"></ul><textarea name="comment" cols="68" rows="3" placeholder="Use comments to reply to other users or notify them of changes. If you are adding new information, edit your post instead of commenting."></textarea></td><td><input tabindex="0" type="submit" value="Add Comment"><br><a tabindex="0" class="comment-help-link">help</a></td></tr><tr><td colspan="2"><span class="text-counter cool">enter at least 15 characters</span><span class="form-error"></span></td></tr></tbody></table></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20662171" class="comments-link " title="Use comments to reply to other users or notify them of changes. If you are adding new information, edit your post instead of commenting." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" style="display: inline;">add comment</a>
+    </td>
+</tr>                  <tr class="bounty-notification">
+          <td class="votecell"></td>
+          <td>
+          <div style="margin-top:20px">
+            <a class="bounty-link bounty" title="offer some of your reputation for better answers">
+                start a bounty
+            </a>
+          </div>
+          </td>
+          </tr>
+    </tbody></table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								8 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="20791713"></a>
+<div id="answer-20791713" class="answer" data-answerid="20791713">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20791713">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20791713" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+<div class="bounty-award-container"><span class="bounty-award" title="This answer has been awarded bounties worth 25 reputation by Community">+25</span></div></div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>As good starting point is to consider the related problem of counting how many eleven-non-free (ENF) integers there are of N digits.  This is not exactly the same thing as finding the n'th ENF integer, but the latter problem can be reduced to the former pretty easily (see the end of this post for java code that does this). </p>
+
+<p>The idea is to do dynamic programming on prefixes.  For any string of digits <code>s</code>, and any integer <code>k</code>, let <code>N(k,s)</code> denote the number of ENF strings of length <code>k</code> which start with <code>s</code>.  And, for any string <code>s</code>, let <code>s_0</code> be the longest suffix of <code>s</code> that also occurs as a prefix of any power of eleven (POE) of length <code>k</code> or less.  Then, assuming that <code>s</code> itself does not contain any POE substrings, we have the equation:</p>
+
+<pre><code>N(k,s) = N(k-length(s)+length(s_0),s_0)
+</code></pre>
+
+<p>The reasoning behind this equation is as follows.  Since <code>s_0</code> is a suffix of <code>s</code>, let us write <code>s</code> as a concatenation of some other string <code>q</code> and <code>s_0</code>: <code>s=[q,s_0]</code>.  Now, let <code>r</code> be any digit string which starts with <code>s</code> and again let us write this as a concatenation, as <code>r=[s,r_0] = [q,s_0,r_0]</code>.  </p>
+
+<p>If <code>r</code> contains a POE as a substring, then either this POE is contained in <code>r_0</code>, or else it crosses over the boundary between <code>s</code> and <code>r_0</code>.  In this case, <code>s</code> must end in a POE prefix, and, since we know that the longest POE prefix that occurs as a suffix of <code>s</code> is <code>s_0</code>, it follows that if <code>r</code> contains a POE substring, then this substring must be contained in <code>[s_0,r_0]</code>.  This gives us a one-to-one correspondence between ENFs that begin with <code>s=[q,s_0]</code> and ENFs that begin with <code>s_0</code>.</p>
+
+<p>This above equation gives rise to a recursive algorithm to count the number of k-digit ENFs with a given prefix.  The base cases end up being instances where <code>length(s_0)=length(s)</code> which means that <code>s</code> itself is a prefix of a POE of length k or less.  Since there aren't very many such POE prefixes (at most k choose 2 which is O(k^2)), this formula leads to an efficient algorithm.  Here is pseudocode:</p>
+
+<pre><code>Given a prefix s and an integer k, this function computes N(k,s)
+
+if s contains a POE then return 10^(k-length(s))
+if length(s) = k return 0 
+let s0 = longest POE prefix which is a suffix of s
+if(length(s0)&lt;length(s))
+  return N(k-length(s)+length(s0),s0)
+total = 0
+for d = "0" to "9"
+  total += N(k,concatenate(s,d))
+return total
+</code></pre>
+
+<p>Using dynamic programming, the running time of this algorithm will be polynomial in k, the number of digits.  The algorithm only recurses on POE prefixes, and since there are O(k^2) of these, the running time will be O(k^2) times the running time of each iteration.  Using a naive O(k^2) algorithm to find the longest suffix that matches a POE prefix would thus lead to an O(k^4) algorithm, while using a radix tree to find matches in linear time would result in O(k^3).  The java code given below uses the naive algorithm, and experimentally, for values up to around k=100 seems to be Θ(k^4.5), though this discrepancy could well be due to implementation details or constant factors affecting runtimes for small input sizes.  Here is the code:</p>
+
+<pre><code>public class Eleven {
+
+  public static final String[] digits = 
+    {"0","1","2","3","4","5","6","7","8","9"};
+
+  public static BigInteger countENF(String prefix, int k){
+    return countENF(prefix,k,new HashMap(),getPowers(k));
+  }
+
+  public static BigInteger countENF(String prefix, 
+      int k, 
+      // This map contains stored results for dynamic programming
+      // Pair is an auxiliary class that does what you think it does
+      Map&lt;Pair&lt;String,Integer&gt;,BigInteger&gt; resultMap,
+      // precomputed list of powers of 11
+      List&lt;String&gt; powers
+      ){
+    // Dynamic programming case
+    BigInteger res = resultMap.get(new Pair(prefix,k));
+    if(res != null)
+      return res;
+
+    // base cases
+    if(!isEFree(prefix, powers)){
+      res = new BigInteger("10").pow(k-prefix.length());
+      resultMap.put(new Pair&lt;&gt;(prefix,k), res);
+      return res;
+    }
+    if(prefix.length() &gt;= k){
+      res = new BigInteger("0");
+      resultMap.put(new Pair&lt;&gt;(prefix,k), res);
+      return res;
+    }    
+    String s0 = getMaxPrefix(prefix, powers);
+    if(s0.length() &lt; prefix.length()){
+      return countENF(s0,k+s0.length()-prefix.length(),resultMap,powers);
+    }
+
+    // recursive summation
+    res = new BigInteger("0");
+    for(String d : digits){
+      String s1 = prefix + d;
+      res = res.add(countENF(s1,k,resultMap,powers));
+    }
+    resultMap.put(new Pair&lt;&gt;(prefix, k), res);
+    return res;
+  }  
+
+
+  //
+  // helper functions
+  //
+
+  // returns all POEs of at most length digits
+  private static List&lt;String&gt; getPowers(int length) {
+    List&lt;String&gt; ret = new ArrayList&lt;&gt;();
+    BigInteger val = new BigInteger("11");
+    BigInteger eleven = new BigInteger("11");
+    while(val.toString().length() &lt;= length){
+      ret.add(val.toString());
+      val = val.multiply(eleven);
+    }
+    return ret;
+  }
+
+  // finds the longest string that is both a prefix of s and a suffix of a POE
+  private static String getMaxSuffix(String s, List&lt;String&gt; powers){
+    for(int i=s.length(); i&gt;0; i--){
+      String sub = s.substring(0,i);
+      for(String p : powers){
+        if(p.endsWith(sub))
+          return sub;
+      }
+    }
+    return "";
+  }
+
+  public static boolean isEFree(String s, List&lt;String&gt; powers){
+    for(String p : powers){
+      if(s.indexOf(p)&gt;=0)
+        return false;
+    }
+    return true;
+  }
+</code></pre>
+
+<p>As mentioned above, this algorithm does not solve the exact problem in the OP.  But, modifying this code to actually find the n'th ENF number is pretty simple.  Making 
+repeated callse to <code>countENF</code>, we first figure out how many digits the n'th ENF number has, 
+and then, one digit at a time, we figure out the digits of the n'th ENF from left to right.</p>
+
+<pre><code> public static String getNthENF(BigInteger i){
+    int k = i.toString().length();
+    HashMap results = new HashMap();
+    List&lt;String&gt; powers = getPowers(k);
+    while(countENF("",k,results,powers).compareTo(i) &lt; 0){
+      k++;
+     powers = getPowers(k);
+    }
+    String solution = "";
+    BigInteger total = new BigInteger("0");
+
+    while(solution.length() &lt; k){
+      for(String d : digits){
+        BigInteger newTotal = total.add(countENF(solution + d,k,results,powers));
+        int comp = newTotal.compareTo(i);
+        if(comp &gt;= 0){
+          solution = solution + d;
+          break;
+        }
+        total = newTotal;
+      }
+    }
+    return solution;
+  }
+</code></pre>
+
+<p>Here is some sample output, giving the N'th ENF as computed using dynamic programming, as well as using brute force, for powers of 10.</p>
+
+<pre><code>Dynamic Programming:
+10^1: 118
+10^2: 1178
+10^3: 11680
+10^4: 115730
+10^5: 1146628
+10^6: 11360558
+10^7: 112558960
+10^8: 1115229050
+10^9: 11049731548
+10^10: 103258311161
+10^11: 935443232311
+10^12: 8576360477119
+10^13: 79330786951511
+10^14: 732117130575070
+10^15: 6880811638385388
+10^16: 64284911460844887
+10^17: 610616803411054857
+10^18: 5759459802926457113
+10^19: 54555977711878792498
+10^20: 518773721711219891634
+Brute Force:
+10^1: 118
+10^2: 1178
+10^3: 11680
+10^4: 115730
+10^5: 1146628
+10^6: 11360558
+10^7: 112558960
+</code></pre>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20791713/759076" title="short permalink to this answer" class="short-link" id="link-post-20791713">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20791713/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20791713">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20791713/revisions" title="show all edits to this post">edited <span title="2013-12-28 14:25:52Z" class="relativetime">Dec 28 '13 at 14:25</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Dec 27 &#39;13 at 19:35. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-20791713" href="http://stackoverflow.com/posts/20791713/revisions" title="show revision history for this post">
+        15 revs<br></a><a href="http://stackoverflow.com/users/2588184">mrip</a>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20791713" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+
+    <tr id="comment-31192322" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sorry, but this is not very clear. Describe an algorithm for the OPs solution (not for something else stating that it can be modified), and prove its time complexity.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/684229/tomas" title="12523 reputation" class="comment-user">Tomas</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31192322_20791713"><span title="2013-12-27 17:37:44Z" class="relativetime-clean">Dec 27 '13 at 17:37</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-31192883" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What is unclear about it?  I've explained the basic algorithm in pseudocode, and then I've given explicit java code which will solves the OP's exact problem.  I haven't proven the time complexity, that is true, although it is pretty clear that it runs in time polynomial to the number of digits.  Experimentally, the running time seems to be <code>O(n^4.5)</code>, although this might be improvable.  I'm not claiming this is the fastest possible algorithm, but it is certainly much better than brute force.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/2588184/mrip" title="5233 reputation" class="comment-user">mrip</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31192883_20791713"><span title="2013-12-27 17:58:29Z" class="relativetime-clean">Dec 27 '13 at 17:58</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20791713" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20791713" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20663112"></a>
+<div id="answer-20663112" class="answer" data-answerid="20663112">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20663112">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20663112" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h3>Edit: This approach misses the eleven-non-free number 1011 for example. I know what's wrong and will fix it, but can't do it now.</h3>
+
+<p>Let's take a principled approach that builds up to the solution rather than trying to handle it all at once.</p>
+
+<p>Let S be the sequence of powers of 11:</p>
+
+<p>11, 121, 1331, 14641, 161051, ...</p>
+
+<p>Let E(n) be the set of numbers that contain the string representation of n as a substring. The set you are looking for is the union of E(n) over n in S.</p>
+
+<p>How do we generate the elements of E(n) for some n? (Let's take n = 121 for example.)</p>
+
+<p>Make a directed acyclic graph where n is the root node. Make n point to all 19 of the following numbers:</p>
+
+<p>Append 0-9: n0 n1 n2 n3 n4 n5 n6 n7 n8 n9<br>
+Prepend 1-9: 1n 2n 3n 4n 5n 6n 7n 8n 9n</p>
+
+<p>Repeat the process for each of these new nodes. Notice that certain nodes may end up with more than one parent, so you'll want to maintain a hashmap from number to node pointer.  (You can get to 71217 by 121 -&gt; 1217 -&gt; 71217 or 121 -&gt; 7121 -&gt; 71217.)</p>
+
+<p>This graph has the property that, for any edge from u to v, we have u &lt; v. This is important because it means we can generate the elements of E(n) in increasing order by doing a breadth-first generation of the graph, always expanding the unexpanded node with smallest number.</p>
+
+<p>Now merge these graphs for all n in S.</p>
+
+<p>You have one large directed acyclic graph (that is infinite) that you can generate in a breadth-first manner, always expanding the unexpanded node with smallest number, emitting the next (kth) eleven-non-free number.</p>
+
+<h1>Pseudocode</h1>
+
+<p><em>It works, I tested it. Here's a C# gist: <a href="https://gist.github.com/timothy-shields/8026924" rel="nofollow">https://gist.github.com/timothy-shields/8026924</a></em></p>
+
+<pre><code>procedure generate_eleven_non_free
+i = 1
+n = 11^i
+//frontier nodes; F.insert(x) does nothing if x already in F
+F = empty-min-heap-set
+while (true)
+{
+    if (F.empty() or F.min() &gt; n)
+    {
+        F.insert(n)
+        i = i + 1
+        n = 11^i
+    }
+    else
+    {
+        m = F.extractmin()
+        yield m
+        for j = 0:9        
+            F.insert(append(m,j))
+        for j = 1:9
+            F.insert(append(j,m))
+    }
+}
+</code></pre>
+
+<p>To get the kth eleven-non-free number, simply do something like generate_eleven_non_free().element_at(k), where this is supposed to pick out the kth yielded number.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20663112/759076" title="short permalink to this answer" class="short-link" id="link-post-20663112">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20663112/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20663112">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20663112/revisions" title="show all edits to this post">edited <span title="2013-12-19 13:06:03Z" class="relativetime">Dec 19 '13 at 13:06</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-12-18 16:15:39Z" class="relativetime">Dec 18 '13 at 16:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1828879/timothy-shields"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/5e67a6d7eb5968245e751e05ba1c936b" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1828879/timothy-shields">Timothy Shields</a><br>
+        <span class="reputation-score" title="reputation score 11634" dir="ltr">11.6k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="47 bronze badges"><span class="badge3"></span><span class="badgecount">47</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20663112" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" data-addlink-html="add comment" data-addlink-disabled="false">
+
+    <tr id="comment-30938184" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>   
+                        </td>
+                        <td>
+                                <div class="comment-up-on" title="you&#39;ve voted for this as a useful comment">up voted</div>   
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Actually I think this can work if we can have a relation where the elements that are at the same level in the tree are also guaranteed to be in increasing/decreasing order. Otherwise the number of elements shall grow exponentially at the power of 19 at each level.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1990169/abhishek-bansal" title="5595 reputation" class="comment-user">Abhishek Bansal</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30938184_20663112"><span title="2013-12-18 16:51:28Z" class="relativetime-clean">Dec 18 '13 at 16:51</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30939942" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@AbhishekBansal That the number of elements grows exponentially is perfectly fine. If you're looking for the kth eleven-non-free number you will still only need to generate O(k) nodes in the graph.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1828879/timothy-shields" title="11634 reputation" class="comment-user">Timothy Shields</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30939942_20663112"><span title="2013-12-18 17:37:15Z" class="relativetime-clean">Dec 18 '13 at 17:37</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30940061" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">See if k = 21. Then won't you need to generate 19*19 nodes in the worst case since you are not differentiating between elements at the same level?</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1990169/abhishek-bansal" title="5595 reputation" class="comment-user">Abhishek Bansal</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30940061_20663112"><span title="2013-12-18 17:40:57Z" class="relativetime-clean">Dec 18 '13 at 17:40</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30940114" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@AbhishekBansal When I say you will only have to generate O(k) nodes, that means it's bounded by ck where c is a constant, approximately 19. Think carefully about it - this is definitely a correct O(k) space/time solution.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1828879/timothy-shields" title="11634 reputation" class="comment-user">Timothy Shields</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30940114_20663112"><span title="2013-12-18 17:42:11Z" class="relativetime-clean">Dec 18 '13 at 17:42</span></a></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30940194" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Ok now I see. Still I feel it would be better if somehow the nodes that are generated at the same level are forcibly generated in ascending order.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1990169/abhishek-bansal" title="5595 reputation" class="comment-user">Abhishek Bansal</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30940194_20663112"><span title="2013-12-18 17:45:11Z" class="relativetime-clean">Dec 18 '13 at 17:45</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20663112" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20663112" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add / show <b>2</b> more comments</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20749651"></a>
+<div id="answer-20749651" class="answer" data-answerid="20749651">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20749651">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20749651" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>It's interesting how easily people get scared by the term <em>"brute force"</em> without even trying to quantify it :)</p>
+
+<h3>Brute force solution is actually O(R * log R)</h3>
+
+<p>where R is the result (<code>k</code>-th eleven-non-free number). You just test all numbers 1..R and for each of them you perform string searches for 11, 121, 1331, 14641 etc. using prepared automaton (for given number of digits). <strong><code>O(R * log R)</code> doesn't look that bad</strong>, if you look at it this way, does it? :-)</p>
+
+<h3>Generation solution?</h3>
+
+<p>Clever idea is to try to generate the number more directly:</p>
+
+<ol>
+<li>either by generating <strong>directly</strong> the <code>k</code>-th number;</li>
+<li>or by <strong>sequentially</strong> generating all 1-<code>k</code> eleven-non-free numbers;</li>
+<li>or by generating <strong>all</strong> eleven-non-free numbers &lt; 10^n at once and sort them up.</li>
+</ol>
+
+<p>Solution 1 would have to be <em>very</em> clever, if not close to impossible. Solution 2 seems better than brute force solution because it skips those numbers which are not eleven-non-free. Solution 3 would be an easily implemented alternative, which brings us to important question:</p>
+
+<h3>How many eleven-non-free numbers &lt; 10<sup>n</sup> exist?</h3>
+
+<p>Easy combinatorics (works exactly for n &lt;= 10; for higher n it is close approximation, neglecting that 11<sup>2</sup> is substring of 11<sup>13</sup> and 11 is substring of 11<sup>11</sup> and 11<sup>19</sup>):</p>
+
+<p><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/CZBjl.png" alt="enter image description here"></p>
+
+<p>so basicly for the limit 10<sup>n</sup> you get more than 10<sup>n-2</sup> solutions! This means that number of solutions is a constant proportion of the limit, which means that</p>
+
+<h3>O(R) = O(k)</h3>
+
+<p>which implies that </p>
+
+<h2>The brute force solution is actually O(k * log k), as well as the <em>generate-all</em> solution!</h2>
+
+<p>The dreaded brute force solution kooks much much better now, doesn't it? Yet it's still the same :)</p>
+
+<h3>Can we get better than this?</h3>
+
+<ul>
+<li>Solution 1 - would be a chance, but close to magic.</li>
+<li>Solution 2 - the best you can hope for is <code>O(k)</code> but you would have to be very careful to achieve this. There will be many complications that will make it uneasy to select next smallest eleven-non-free-number. E.g. when generating all 11xxx, 121xx, 1331x, eg. 13121 falls in between, making any automatic generation of <em>ordered</em> numbers difficult, let alone duplicities caused by pattern appearing in xxx digits etc. You will probably end up with some complicated data structure that will force <code>O(log k)</code> in each step, and thus <code>O(k log k)</code> in total.</li>
+<li>Solution 3 - this we already know is <code>O(k log k)</code>, which is the same as to find <code>k</code>-th number.</li>
+</ul>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20749651/759076" title="short permalink to this answer" class="short-link" id="link-post-20749651">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20749651/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20749651">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20749651/revisions" title="show all edits to this post">edited <span title="2013-12-27 19:51:40Z" class="relativetime">Dec 27 '13 at 19:51</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-12-23 19:05:12Z" class="relativetime">Dec 23 '13 at 19:05</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/684229/tomas"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/85563a10880a014c4910e94b99423152" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/684229/tomas">Tomas</a><br>
+        <span class="reputation-score" title="reputation score 12523" dir="ltr">12.5k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="42 silver badges"><span class="badge2"></span><span class="badgecount">42</span></span><span title="111 bronze badges"><span class="badge3"></span><span class="badgecount">111</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20749651" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+
+    <tr id="comment-31103590" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Good! I never got around to fixing up my answer and now I don't have to. ;)</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1828879/timothy-shields" title="11634 reputation" class="comment-user">Timothy Shields</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31103590_20749651"><span title="2013-12-24 04:34:18Z" class="relativetime-clean">Dec 24 '13 at 4:34</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-31139645" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">No, don't use brute force -- there's an O(polylog(k))-time algorithm. Perhaps someone else will be in the mood to post spoilers about it.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/2144669/david-eisenstat" title="4694 reputation" class="comment-user">David Eisenstat</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31139645_20749651"><span title="2013-12-25 18:10:02Z" class="relativetime-clean">Dec 25 '13 at 18:10</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-31170121" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Dynamic programming works here.  Finding the k'th eleven-non-free number is closely related to counting the number of eleven-non-free numbers of a given length, which is the kind of thing DP is good at.  See my answer below, for example.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/2588184/mrip" title="5233 reputation" class="comment-user">mrip</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment31170121_20749651"><span title="2013-12-26 23:26:07Z" class="relativetime-clean">Dec 26 '13 at 23:26</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20749651" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20749651" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20840105"></a>
+<div id="answer-20840105" class="answer" data-answerid="20840105">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20840105">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20840105" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><code>given a k, find the kth eleven-non-free number.</code>...
+is a big question. </p>
+
+<p>Since this is time taking question, I am writing pseudo code. </p>
+
+<ol>
+<li><strong>First step</strong> Keep the powers of eleven handy</li>
+</ol>
+
+<p><code>var eleven_powers = [];
+for (var i=0; i&lt;1000; i++)
+   eleven_powers.push(Math.pow(11,i));</code></p>
+
+<ol>
+<li><strong>Second Step</strong> Keep all possible <code>non-eleven-free</code> numbers to an extent you can. This will have to deal with big integers.</li>
+</ol>
+
+<p><code>for (var i=11; i&lt;Integer.MAX_VALUE; i++){
+    if(string(i).substring(for each of eleven_powers) == true)
+    store it sequentially results_array
+}</code></p>
+
+<ol>
+<li><strong>Third Step</strong> <code>Take k, return results_array[k]</code></li>
+</ol>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20840105/759076" title="short permalink to this answer" class="short-link" id="link-post-20840105">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20840105/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20840105">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20840105/revisions" title="show all edits to this post">edited <span title="2013-12-30 13:05:37Z" class="relativetime">Dec 30 '13 at 13:05</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-12-30 13:00:21Z" class="relativetime">Dec 30 '13 at 13:00</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1909727/sivatumma"><div class="gravatar-wrapper-32"><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/irBUr.jpg" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1909727/sivatumma">sivatumma</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">600</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20840105" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20840105" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20840105" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20779017"></a>
+<div id="answer-20779017" class="answer" data-answerid="20779017">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20779017">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20779017" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This looks like an <code>O(klog^2(k))</code> algorithm:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="kwd">def</span><span class="pln"> add</span><span class="pun">(</span><span class="pln">vals</span><span class="pun">,</span><span class="pln"> new_vals</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> val</span><span class="pun">):</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> val </span><span class="pun">&lt;</span><span class="pln"> m </span><span class="kwd">and</span><span class="pln"> val </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> vals </span><span class="kwd">and</span><span class="pln"> val </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> new_vals</span><span class="pun">:</span><span class="pln">
+        new_vals</span><span class="pun">.</span><span class="pln">append</span><span class="pun">(</span><span class="pln">val</span><span class="pun">)</span><span class="pln">
+
+</span><span class="kwd">def</span><span class="pln"> kth11</span><span class="pun">(</span><span class="pln">k</span><span class="pun">):</span><span class="pln">
+    vals </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="lit">11</span><span class="pun">**</span><span class="pln">i </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> k</span><span class="pun">+</span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">]</span><span class="pln">
+    new_vals </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">]</span><span class="pln">
+    </span><span class="kwd">while</span><span class="pln"> </span><span class="kwd">True</span><span class="pun">:</span><span class="pln">
+        vals </span><span class="pun">=</span><span class="pln"> sorted</span><span class="pun">(</span><span class="pln">vals </span><span class="pun">+</span><span class="pln"> new_vals</span><span class="pun">)</span><span class="pln">
+        vals </span><span class="pun">=</span><span class="pln"> vals</span><span class="pun">[:</span><span class="pln">k</span><span class="pun">]</span><span class="pln">
+        m </span><span class="pun">=</span><span class="pln"> vals</span><span class="pun">[-</span><span class="lit">1</span><span class="pun">]</span><span class="pln">
+        new_vals </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">]</span><span class="pln"> 
+        </span><span class="kwd">for</span><span class="pln"> v </span><span class="kwd">in</span><span class="pln"> vals</span><span class="pun">:</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">):</span><span class="pln">
+                val </span><span class="pun">=</span><span class="pln"> int</span><span class="pun">(</span><span class="pln">str</span><span class="pun">(</span><span class="pln">s</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> str</span><span class="pun">(</span><span class="pln">v</span><span class="pun">))</span><span class="pln">
+                add</span><span class="pun">(</span><span class="pln">vals</span><span class="pun">,</span><span class="pln"> new_vals</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> val</span><span class="pun">)</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">):</span><span class="pln">
+                val </span><span class="pun">=</span><span class="pln"> int</span><span class="pun">(</span><span class="pln">str</span><span class="pun">(</span><span class="pln">v</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> str</span><span class="pun">(</span><span class="pln">s</span><span class="pun">))</span><span class="pln">
+                add</span><span class="pun">(</span><span class="pln">vals</span><span class="pun">,</span><span class="pln"> new_vals</span><span class="pun">,</span><span class="pln"> m</span><span class="pun">,</span><span class="pln"> val</span><span class="pun">)</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">new_vals</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">break</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> vals</span><span class="pun">[-</span><span class="lit">1</span><span class="pun">]</span><span class="pln">
+
+</span><span class="kwd">print</span><span class="pln"> kth11</span><span class="pun">(</span><span class="lit">130</span><span class="pun">)</span></code></pre>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20779017/759076" title="short permalink to this answer" class="short-link" id="link-post-20779017">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20779017/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20779017">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20779017/revisions" title="show all edits to this post">edited <span title="2013-12-26 23:46:36Z" class="relativetime">Dec 26 '13 at 23:46</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3072164/nabla"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/5dd3990939181cb33c01e1f306761e09" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3072164/nabla">Nabla</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">767</span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-12-26 04:11:45Z" class="relativetime">Dec 26 '13 at 4:11</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/390913/perreal"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/87a2a7e9ea54bcd1a6c8f09f8c2e8f3b" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/390913/perreal">perreal</a><br>
+        <span class="reputation-score" title="reputation score 39242" dir="ltr">39.2k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="60 bronze badges"><span class="badge3"></span><span class="badgecount">60</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20779017" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20779017" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20779017" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20747752"></a>
+<div id="answer-20747752" class="answer" data-answerid="20747752">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20747752">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20747752" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This sounds like a divide and conquer algorithm to me.</p>
+
+<p>This problem feels very similar to: <a href="http://www.geeksforgeeks.org/divide-and-conquer-maximum-sum-subarray/" rel="nofollow">http://www.geeksforgeeks.org/divide-and-conquer-maximum-sum-subarray/</a></p>
+
+<p>and this:  <a href="http://en.wikipedia.org/wiki/Maximum_subarray_problem" rel="nofollow">http://en.wikipedia.org/wiki/Maximum_subarray_problem</a></p>
+
+<p>When you divide you split the original String s into 2 parts that are roughly 1/2 as big.  At the bottom of your recursion you have easy problems with small 1 char Strings that are all eleven-free (because they don't contain enough chars to have any powers of 11 inside).</p>
+
+<p>The "trick" comes in when you "step up" in the recursion.  In this step you need to take advantage of the fact that any "power" (i.e. 121) you are looking for MUST bridge the "middle" of the input string.  </p>
+
+<p>For example, when you "step up" from Strings of length 1 to Strings of length 2 you'll know that some of the power you're looking for is in the first half, and some is in the second half of the input string.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20747752/759076" title="short permalink to this answer" class="short-link" id="link-post-20747752">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20747752/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20747752">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-12-23 16:52:31Z" class="relativetime">Dec 23 '13 at 16:52</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/460790/ivan"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/29378c88e5cc108a2f2e1e3638a55740" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/460790/ivan">Ivan</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">346</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20747752" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20747752" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20747752" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20876027"></a>
+<div id="answer-20876027" class="answer" data-answerid="20876027">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20876027">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20876027" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>OK, this took several days to figure out. The first important thing to understand is that the only concrete requirement of the euler puzzle 442 that this question stems from is to solve for E(10^18). The unrelated examples of what an 11-free number means are just distractions. As programmers we tend to think more abstractly and perceive the task as being to solve for any Nth number, which is radically different from solving specifically for Nth(10^18). I definitely fell into this trap early on.</p>
+
+<p>The brute force option is out of the question, for 2 reasons.</p>
+
+<ol>
+<li><p>It requires literally a quintilian string comparisons and would take a week to resolve on most home computers.</p></li>
+<li><p>Leonhard Euler was a mathematician so the spirit of the question has to be interpreted in that context.</p></li>
+</ol>
+
+<p>So after finally getting what I was even trying to figure out, I started focusing on pattern matching for powers of 10, instead of continually including powers of 11 in my algorithms. After you calculate what the powers of 11 are, you're done with anything related to that. They only represent strings. They aren't even included in the final algorithm, they are just used in the detective work.</p>
+
+<p>I started trying to get a detailed understanding of how new 11-containing numbers are introduced between powers of 10 and if there was a predictable pattern. If there was, then it would just be a matter of using that pattern to deduce all of the 11-containing numbers introduced prior to any 10^ stopping point.</p>
+
+<h2>Understanding the Main Concepts</h2>
+
+<p>For each new 10^ reached, the number of previous 11^ string matches are identical to the previous 10^ range. It's easier to explain with a chart.</p>
+
+<p>Here is a list of 10^2 - 10^6 that shows the count of new 11-containing numbers introduced so far and grouped by the 11^ number that matched the string. </p>
+
+<p><strong>Fig 1.)</strong> Number of 11^ matches in 10^ ranges grouped by 11^ string match</p>
+
+<pre><code>---------------------------
+10^2 range (10 - 100)
+---------------------------
+    11            1
+---------------------------
+10^3 range (100 - 1000)
+---------------------------
+    11           18
+    121           1
+---------------------------
+10^4 range (1000 - 10000)
+---------------------------
+    11          260
+    121          18
+    1331          1
+---------------------------
+10^5 range (10000 - 100000)
+---------------------------
+    11         3392
+    121         260
+    1331         18
+    14641         1
+---------------------------
+10^6 range (100000 - 1000000)
+---------------------------
+    11        41760
+    121        3392
+    1331        260
+    14641        18
+    161051        1
+
+etc...
+</code></pre>
+
+<p>There are two requirements for making this list.</p>
+
+<ol>
+<li><p>When multiple 11-containing numbers are match sequentially (like 11000 - 11999) all of those items must be attributed to the 11^ group of the first match. Meaning that even though there will be matches for 121 and 1331 in that example, all matches in that range are attributed to 11, because it is first. </p></li>
+<li><p>Matches are made based on the shortest possibility first. i.e.) 11, 121, 1331, etc... This is because some numbers match multiple 11^ strings while others appear inside of a contiguous range. And, matching them from high to low doesn't produce a predictable pattern. Functionally, it's all the same. This just brings a whole lot of clarity into the picture.</p></li>
+</ol>
+
+<p>Notice that in each new 10^ range, only 1 new 11^ match is introduced. And, the number of matches for each previous 11^ number is identical, regardless of the previous power. The difficulty here is that the number of *11 string matches can't be directly inferred from the previous power.</p>
+
+<p><strong>Fig 2.)</strong> Differentiating other 11^ patterns from the *11 match</p>
+
+<pre><code>    ****11
+    ***110 pattern
+    **1100 pattern
+    *11000 pattern
+    110000 pattern
+    etc...
+</code></pre>
+
+<p>All of the "pattern" matches are highly predictable within 10^ powers. Only the *11 numbers are not obvious in how they accumulate. It's not really that there isn't a pattern, the problem is that you would have to presume numbers that were scanned right to left and, as a result, none if the other patterns would be predictable anymore.</p>
+
+<p>As it turns out, a separate accumulator has to be tracked concurrently that allows us to use the previous *11 matches to calculate the number of new *11 matches. For any of you math geniuses out there, there may be a more elegant solution. But, here is mine.</p>
+
+<p>You have to always be separately keeping track of the number of *11 matches from the <strong>previous  2</strong> powers. Using these as operands, you can calculate the number of *11 matches for the current power.</p>
+
+<p>Example:</p>
+
+<p>The number of *11 matches in the 10^3 range is 8. There are also 10 matches on "110" but they don't matter here, we are just tracking numbers that end with "11". So, we are starting with the 2 previous *11 match counts being 8 and 0 from the <strong>2 previous</strong> 10^ ranges.</p>
+
+<p><strong>Important:</strong> For any number less than 10^2, 0 is the previous match count for this calculation. That is why 0 is the second look-back operand when working with 10^3.</p>
+
+<p><strong>Fig 3.)</strong> How to calculate *11 match counts per 10^ range using back-tracking</p>
+
+<pre><code>    10^3 |   80 = 8 * 10 - 0;
+    10^4 |  792 = 80 * 10 - 8;
+    10^5 | 7840 = 792 * 10 - 80;
+</code></pre>
+
+<p>This number however is only useful by looking at it, again, from a different perspective.</p>
+
+<p><strong>Fig 4.)</strong> Illustration of how match groups scale by powers of 10</p>
+
+<pre><code>    ==================================
+      #    Formulas for 10^4
+    ==================================
+     80    **11         = 8 * 10 - 0
+     80    *110 pattern = previous power's *11 times 10
+    100    1100 pattern = previous power's 110 times 10
+    ==================================
+    260   Total matches in range
+
+    ==================================
+       #  Formulas for 10^5
+    ==================================
+     792  ***11         = 80 * 10 - 8
+     800  **110 pattern = previous power's **11 times 10
+     800  *1100 pattern = previous power's *110 times 10
+    1000  11000 pattern = previous power's 1100 times 10
+    ==================================
+    3392  Total matches in range
+</code></pre>
+
+<p>In these examples, only the *11 number has to be calculated separately. Seeing these numbers stacked like this sort of makes it feel more complicated than it is. It's only important to understand the concept. In practice, we abstract out everything except the *11 calculation through cumulative multiplication.</p>
+
+<p>Now, before we get into a working algorithm, the last thing to understand conceptually is how to use these patterns to calculate the Nth 11-free number ending at each ^10.</p>
+
+<p>This is a two step process so I'll demonstrate using an example. Lets look at the 1000 - 10000 range from Fig 1. 10000 is 10^4 so that is the range we are solving for.</p>
+
+<p>The following 11^ groups are all within that range. The 18 and the 1 can be derived from the previous powers (see Fig 1).</p>
+
+<pre><code>    match         #
+    ---------------
+    11          260
+    121          18
+    1331          1
+</code></pre>
+
+<ol>
+<li><p>Calculate the total 11-containing matches in the current 10^4 range. To do this, we first have to calculate the value for the "11" match category. The 260 value above can be calculated using numbers from <strong>both</strong> the previous ranges and the separate *11 tracking operands like so:</p>
+
+<p>Calculating *11 count for 10^4</p>
+
+<pre><code>    260 = (18 * 10) + (8 * 10 - 0)        
+</code></pre>
+
+<ul>
+<li>Where 18 is the total of all "11" matches (not necessarily *11) from the 10^3 range (see Fig 1). </li>
+<li>The 10's are constants.</li>
+<li>And, 8 and 0 are our starting points, mentioned previously, for separately calculating *11 changes.</li>
+</ul></li>
+<li><p>Combine the result of 10^4 with all the other results back to 10^2. <strong>Note:</strong> The total matches for 10^2 is 1 because there is only one 11-containing number from 0 through 100.</p>
+
+<pre><code>Total 11-containing numbers in 10^4 range:  279 = 260 + 18 + 1
+Total 11-containing numbers in 10^4 range:  299 = 279 + 19 + 1
+                                           ---------------------
+                              10^4 solved: 9701 = 10^4 - 299
+</code></pre></li>
+</ol>
+
+<h2>A Working Algorithm</h2>
+
+<p>Here is an algorithm written in C# that solves for each of 10^1 through 10^18. It returns almost instantly. Out of respect for project euler I didn't post the answer to their puzzle directly. The output is accurate though. Right now the #442 question only shows 163 people have solved the problem compared to 336260 people solving problem #1. If that number starts growing for no reason, I will delete this post.</p>
+
+<pre><code>    private ulong GetNthElevenFreeForPow10(uint pow){
+
+        if(pow &gt; 18)
+            throw new ArgumentException("Argument must be a positive integer between 1 and 18", "pow");
+
+        // All of the numbers up to 10^0 &amp; 10^1 are 11-free
+        // if 1 is considered 11-free as the euler question 
+        // states.
+        if (pow == 0 || pow == 1)
+            return (ulong)Math.Pow(10, pow);
+
+        // The sequence of 11s doesn't form a repeatable pattern
+        // until 10^4 because it requires back tracking to 
+        // calculated running totals.
+        if (pow == 2)
+            return (ulong)Math.Pow(10, pow) - 1;
+
+        if (pow == 3)
+            return (ulong)Math.Pow(10, pow) - (18 + 1 + 1);
+
+        // At each new power the number of elevens created is 
+        // easily predicted based on the previous power. But, 
+        // the number of new entries ending with 11 i.e.) xxx11
+        // is a little trickier. It requires a lookback at the 
+        // two previous powers. This array stores the lookback 
+        // operands used to make that calculation.
+        ulong[] lookbackOperands = new ulong[] { 
+            0, 8
+        };
+
+        // this number is used to calculate all of the new 11-containing 
+        // numbers for each power. The next power is always a calculation 
+        // on the previous.
+        ulong elevensConsumedCurrent = 18;
+        ulong elevensConsumedPrevious = 18 + 1;
+
+        // this number holds a running total all 11-containing
+        // numbers consumed so far.
+        ulong elevensConsumedTotal = 20;
+
+        for (int n = 4; n &lt;= pow; n++) {
+            // Calculate the number of new items added that end with "11".
+            ulong endsWith11Current = lookbackOperands[1] * 10 - lookbackOperands[0];
+            lookbackOperands[0] = lookbackOperands[1];
+            lookbackOperands[1] = endsWith11Current;
+
+            elevensConsumedCurrent = elevensConsumedCurrent * 10 + endsWith11Current;
+            elevensConsumedPrevious += elevensConsumedCurrent;
+            elevensConsumedTotal += elevensConsumedPrevious;
+        }
+
+        return (ulong)Math.Pow(10, pow) - elevensConsumedTotal;
+
+    }
+</code></pre>
+
+<p>Usage:</p>
+
+<pre><code>        StringBuilder sb = new StringBuilder();
+        for (uint n = 1; n &lt;= 18; n++)
+            sb.AppendLine(String.Format(
+                    "Nth 11-Free Number @ 10^{0}\t{1}", 
+                    n, 
+                    GetNthElevenFreeForPow10(n).ToString()
+                )
+            );
+
+        Console.WriteLine(sb.ToString());
+</code></pre>
+
+<p>Here are the first 15.</p>
+
+<pre><code>Nth 11-Free Number @ 10^1   10
+Nth 11-Free Number @ 10^2   99
+Nth 11-Free Number @ 10^3   980
+Nth 11-Free Number @ 10^4   9701
+Nth 11-Free Number @ 10^5   96030
+Nth 11-Free Number @ 10^6   950599
+Nth 11-Free Number @ 10^7   9409960
+Nth 11-Free Number @ 10^8   93149001
+Nth 11-Free Number @ 10^9   922080050
+Nth 11-Free Number @ 10^10  9127651499
+Nth 11-Free Number @ 10^11  90354434940
+Nth 11-Free Number @ 10^12  894416697901
+Nth 11-Free Number @ 10^13  8853812544070
+Nth 11-Free Number @ 10^14  87643708742799
+Nth 11-Free Number @ 10^15  867583274883920
+</code></pre>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20876027/759076" title="short permalink to this answer" class="short-link" id="link-post-20876027">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20876027/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20876027">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20876027/revisions" title="show all edits to this post">edited <span title="2014-01-02 23:26:20Z" class="relativetime">12 mins ago</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-01-02 03:46:13Z" class="relativetime">19 hours ago</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/3034826/drankin2112"><div class="gravatar-wrapper-32"><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/zIBMO.jpg" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/3034826/drankin2112">drankin2112</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">839</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20876027" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20876027" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."><table><tbody><tr><td><textarea name="comment" cols="68" rows="3" placeholder="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></textarea></td><td><input tabindex="0" type="submit" value="Add Comment"><br><a tabindex="0" class="comment-help-link">help</a></td></tr><tr><td colspan="2"><span class="text-counter cool">enter at least 15 characters</span><span class="form-error"></span></td></tr></tbody></table></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20876027" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" style="display: none;">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+
+  
+<a name="20663183"></a>
+<div id="answer-20663183" class="answer" data-answerid="20663183">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20663183">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post " title="View upvote and downvote totals" style="cursor: pointer;">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+    <a id="vote-accepted-20663183" class="vote-accepted-off " href="javascript:void(0);" data-title-accept="click to set this answer as your accepted answer; click again to toggle" data-verb-accept="accept" data-title-unaccept="click to unaccept this answer; you accepted this answer " data-verb-unaccept="unaccept" title="click to set this answer as your accepted answer; click again to toggle">accept</a>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><code>10^18</code> is really, really big. Brute force is not your friend. </p>
+
+<p>However, let us note some conveniences:</p>
+
+<ul>
+<li>If a string <code>s</code> represents a eleven-non-free number, then trivially so does <code>d s</code> (where <code>d</code> is a string of digits).</li>
+<li>If you wanted to know how many <code>k</code>-digit numbers are eleven-non-free, you could base that off of how many <code>k-1</code>-digit numbers are eleven-non-free.</li>
+<li>(e.g. how many 1xx numbers are eleven-non-free? Well, how many xx numbers are eleven-non-free? Obviously at least that many 1xx numbers are eleven-non-free.. The only additional cases are when a power of eleven starts with the digit at the start -- with the 1 that just got tacked on the front.)</li>
+<li>This suggests a relatively straightforward dynamic programming approach to figure out how many eleven-non-free numbers are in a string of known length with a fixed prefix. (e.g. how many eleven-non-free numbers are in 934xxxxx)</li>
+</ul>
+
+<p>Finally, throw some binary-search style logic on top, and you should be able to find exactly which number is the N-th eleven-non-free number.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/20663183/759076" title="short permalink to this answer" class="short-link" id="link-post-20663183">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/20663183/edit" class="edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="20663183">flag</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/20663183/revisions" title="show all edits to this post">edited <span title="2013-12-18 16:38:50Z" class="relativetime">Dec 18 '13 at 16:38</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-12-18 16:19:16Z" class="relativetime">Dec 18 '13 at 16:19</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/873886/kaganar"><div><img src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/344697d54c0db06b0a9a426f6e319374" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/873886/kaganar">Kaganar</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,905</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20663183" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" data-addlink-html="add comment" data-addlink-disabled="false">
+
+    <tr id="comment-30937442" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I've skipped a lot of explanation in the hopes that this gives you the "push" you need to solve the problem. If you'd like a more explicit answer, please state so.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/873886/kaganar" title="3905 reputation" class="comment-user">Kaganar</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30937442_20663183"><span title="2013-12-18 16:32:55Z" class="relativetime-clean">Dec 18 '13 at 16:32</span></a></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30937825" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think you also need to consider suffixes - i.e. <code>x s y</code> instead if your <code>x s</code>, where either <code>x</code> or <code>y</code> can be empty (but not both, because you already know the status of <code>s</code>). Otherwise you might miss things like <code>112</code>...</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1253222/twalberg" title="14596 reputation" class="comment-user">twalberg</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30937825_20663183"><span title="2013-12-18 16:42:27Z" class="relativetime-clean">Dec 18 '13 at 16:42</span></a></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30937981" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The notion here is we're tacking on a prefix to a known class of strings. That is, we know that there is exactly one eleven-non-free number for two-digit numbers (i.e. numbers of form xx). If we want to examine numbers of form 1xx we would have to only add cases where powers of eleven start at the newly added '1' since all the suffix cases are already handled. Hence, there's no reason to consider suffixes separately. (hence we'd be looking to see if 11 and 121 can appear in 1xx, and if so, would the number already be counted?)</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/873886/kaganar" title="3905 reputation" class="comment-user">Kaganar</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30937981_20663183"><span title="2013-12-18 16:46:24Z" class="relativetime-clean">Dec 18 '13 at 16:46</span></a></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30938656" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                    <a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                    <a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes, but you're building that class of strings by considering strings that are already in the class. If you start with <code>{11, 121, ...}</code>, how would you ever determine <code>112</code> belongs in the class if you don't consider suffixes? I agree if you know that <code>112</code> is already in the class, then any prefix you add should also produce a member of the class, but if you only consider prefixes, you're not generating the full set. You need to consider cases where there's a prefix as well as cases where there's a suffix, and cases where there's both a prefix and a suffix.</span>
+	–&nbsp;
+		<a href="http://stackoverflow.com/users/1253222/twalberg" title="14596 reputation" class="comment-user">twalberg</a>
+	<span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#comment30938656_20663183"><span title="2013-12-18 17:03:32Z" class="relativetime-clean">Dec 18 '13 at 17:03</span></a></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+				    <tfoot>
+					    <tr>
+						    <td></td>
+						    <td class="comment-form">
+							    <form id="add-comment-20663183" class="" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form>
+						    </td>
+					    </tr>
+				    </tfoot>
+		    </table>
+	    </div>
+			<a id="comments-link-20663183" class="comments-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">add comment</a>
+    </td>
+</tr>
+    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/20662171/answer/submit" method="post" class="dno post-form">
+							<input type="hidden" id="post-id" value="20662171">
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: false,
+            discardSelector: ".discard-answer"
+            
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+    <div class="community-option">
+        <input id="communitymode" name="communitymode" type="checkbox">
+        <label for="communitymode" title="Marking an answer community wiki encourages others to edit it by lowering the reputation barrier required to edit. However, you will not gain any upvote reputation from it. This cannot be undone.">community wiki</label>
+    </div>
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="e2219d1c297a3f779f90227c1e0e54d6">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="discard-answer dno">discard</a>
+								</div>
+						</form>
+							<div id="show-editor-button" class="form-submit">
+								<input type="button" value="Answer Your Question" data-confirm-text="Are you sure you want to answer your own question?
+
+If you&#39;re responding to answers left on your question, enter comments under each answer.
+
+If you need to add details to your question, use the edit link under your question.">
+							</div>
+							<script type="text/javascript">
+								StackExchange.ready(function () {
+									$("#show-editor-button input").click(function () {
+										if (confirm($(this).data('confirm-text'))) {
+											$("#show-editor-button").hide();
+											$("#post-form").removeClass("dno");
+											StackExchange.editor.finallyInit();
+										}
+									});
+								});
+							</script>
+
+					<script type="text/javascript">
+						StackExchange.using("inlineEditing", function () {
+							StackExchange.inlineEditing.init();
+						});
+					</script>
+
+
+<div>
+    <h2 class="bottom-notice">
+        Would you like to have responses to your questions <a id="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425" href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#">sent to you via email</a>?
+    </h2>
+    <div id="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-container" style="display: none; ">
+        <div>
+            <input type="checkbox" id="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-enable">
+            <label for="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-enable">
+                Email me my unread inbox messages
+            </label>
+            <select id="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-freq">
+                <option value="3">every 3 hours</option>
+                <option value="24">daily</option>
+                <option value="168">weekly</option>
+            </select>
+        </div>
+        <div>
+            Send emails to
+            <input id="inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-address" style="width: 300px;" value="interlock.public@gmail.com">
+        </div>
+        <div>
+            <input class="email-save" type="button" value="Save email settings" disabled="disabled">
+        </div>
+        <div class="email-confirmation"></div>
+        <hr>
+    </div>
+</div>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        var inboxSettingsShown = false;
+        $("#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425").click(function () {
+            var ec = $('#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-container');
+            var btn = ec.find(".email-save");
+            var result = ec.find(".email-confirmation");
+            
+            var enableSave = function () {
+                btn.removeAttr("disabled");
+                result.html('');
+            };
+
+            var disableSave = function () {
+                btn.attr("disabled", "disabled");
+            };
+            disableSave();
+
+            if (ec.is(':visible')) {
+                ec.slideUp('fast');
+            } else {
+                if (!inboxSettingsShown) {
+                    StackExchange.gps.track('inbox_settings.show', { location: 4 });
+                    inboxSettingsShown = true;
+                }
+                ec.slideDown('fast');
+            }
+            
+            $("#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-freq").val(3).on("click focus", function () { $("#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-enable").prop("checked", true); });
+            $("#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-address").focus().keyup(enableSave);
+            $("#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-enable, #inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-freq").change(enableSave);
+
+            btn.click(function () {
+                var req =
+                {
+                    email: $('#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-address').val(),
+                    fkey: StackExchange.options.user.fkey,
+                    optin: $('#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-enable').is(':checked'),
+                    freq: $('#inbox-notify-5bf34dfb71574398a2abaf51a5fa4425-freq').val(),
+                    location: 4
+                };
+                ec.addSpinner();
+                $.post(
+                    '/accounts/verified-email-set',
+                    req,
+                    function (data) {
+                        ec.removeSpinner();
+                        result.html(data.message).fadeIn();
+
+                        if (data.success) disableSave();
+                    },
+                    'json');
+            });
+
+            return false;
+        });
+    });
+</script>
+
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="http://stackoverflow.com/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">36476</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/data-structures" class="post-tag" title="show questions tagged &#39;data-structures&#39;" rel="tag">data-structures</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">9801</span></span><br>
+</div>
+					<table id="qinfo">
+						<tbody><tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-12-18 15:32:42Z"><b>15 days ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>414 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?lastactivity" class="lastactivity-link" title="2014-01-02 23:26:20Z">today</a></b></p>
+								</td>
+							</tr>
+					</tbody></table>
+				</div>
+						
+			<script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk662671423",17).setZone(45) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk662671423"><div id="careersadsdoublehigh" style="display:none;"></div><img height="0px" width="0px" border="0" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/i.gif"></div>  
+    <div id="hireme"> <a href="http://careers.stackoverflow.com/jobs?a=144" class="top" target="_blank"></a> <ul class="jobs"> <li> <a href="http://careers.stackoverflow.com/jobs/32016/java-scala-web-developer-shazam?a=D2UXCCc0" target="_blank" title="Java/Scala Web Developer at Shazam. Click to learn more."> Java/Scala Web Developer<br> <span class="company">Shazam</span> <span class="location">London, United Kingdom</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/45463/devops-engineer-lyst?a=TrIv97Py" target="_blank" title="DevOps Engineer at Lyst. Click to learn more."> DevOps Engineer<br> <span class="company">Lyst</span> <span class="location">London, United Kingdom /…</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/45538/ios-mobile-developer-mentally-friendly?a=Txo72vqo" target="_blank" title="iOS mobile developer at Mentally Friendly. Click to learn more."> iOS mobile developer<br> <span class="company">Mentally Friendly</span> <span class="location">London, United Kingdom</span> </a> </li> <li class="city"><a href="http://careers.stackoverflow.com/jobs/location/london%2c%20united%20kingdom?a=x0VW">More jobs near London...</a></li> </ul> <img alt="" class="impression" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/D2UXCCc0-TrIv97Py-Txo72vqo-144-x0VW" style="display:none"></div>
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/1436669?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="http://stackoverflow.com/questions/1436669/how-to-find-kth-largest-number-in-pairwise-sums-like-seta-setb?rq=1" class="question-hyperlink">How to find kth largest number in pairwise sums like setA + setB?</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/3492302?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">370
+    </div>
+</a><a href="http://stackoverflow.com/questions/3492302/easy-interview-question-got-harder-given-numbers-1-100-find-the-missing-numbe?rq=1" class="question-hyperlink">Easy interview question got harder: given numbers 1..100, find the missing number(s)</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/9524828?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="http://stackoverflow.com/questions/9524828/finding-pairs-with-smallest-xor-values-from-a-list?rq=1" class="question-hyperlink">Finding pairs with smallest XOR values from a list</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/14297912?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/14297912/finding-the-kth-largest-element-using-a-min-heap?rq=1" class="question-hyperlink">Finding the kth largest element using a min-heap</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/15193469?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="http://stackoverflow.com/questions/15193469/maximum-sum-of-a-non-decreasing-sub-sequence-in-an-array-using-fenwick-tree-or-b?rq=1" class="question-hyperlink">Maximum Sum of a non decreasing sub-sequence in an array using fenwick tree or BIT</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/15909944?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/15909944/finding-least-difference-between-max-and-min-value-of-all-possible-sets-of-numbe?rq=1" class="question-hyperlink">Finding least difference between max and min value of all possible sets of numbers</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/15968587?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/15968587/move-square-inside-large-matrix-find-minimum-number-in-overlapping?rq=1" class="question-hyperlink">Move square inside large matrix, find minimum number in overlapping</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/18302325?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="http://stackoverflow.com/questions/18302325/how-to-find-an-index-of-an-number-in-a-sorted-array-with-an-offset?rq=1" class="question-hyperlink">How to find an index of an number in a sorted array with an offset</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/18956792?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="http://stackoverflow.com/questions/18956792/finding-a-non-consecutive-recurring-pattern-inside-a-stream?rq=1" class="question-hyperlink">Finding a non-consecutive recurring pattern inside a stream</a>
+</div>
+<div class="spacer js-gps-track">
+<a href="http://stackoverflow.com/q/20601582?rq=1" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="http://stackoverflow.com/questions/20601582/algorithm-for-finding-kth-binary-number-with-certain-properties?rq=1" class="question-hyperlink">Algorithm for finding kth binary number with certain properties</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/17005/produce-the-number-2014-without-any-numbers-in-your-source-code" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Produce the number 2014 without any numbers in your source code
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="http://electronics.stackexchange.com/questions/95217/how-can-i-indicate-pin-1-on-a-smt-package-footprint-without-silkscreen" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I indicate pin 1 on a SMT package footprint without silkscreen
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/20877086/confusion-in-method-integer-valueofstring" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Confusion in method Integer.valueOf(String)
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/16226/i-need-a-program-where-the-user-inputs-an-array-of-doubles-and-the-program-outpu" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    I need a program where the user inputs an array of doubles and the program outputs the array sorted
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/625223/do-we-know-if-there-exist-true-mathematical-statements-that-can-not-be-proven" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do we know if there exist true mathematical statements that can not be proven?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/38435/javascript-templating-libraries-intelligibility-and-their-performance-compared" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Javascript templating libraries' intelligibility and their performance (compared to mine)
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="http://physics.stackexchange.com/questions/92050/do-gravitational-lenses-have-a-focus-point" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Do gravitational lenses have a focus point?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="http://mathoverflow.net/questions/153302/teaching-homology-via-everyday-examples" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Teaching homology via everyday examples
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/143782/idiom-or-word-for-a-very-crowded-place" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Idiom or word for a very crowded place
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="http://tex.stackexchange.com/questions/152196/what-is-the-advantage-of-using-the-notation-fig-in-the-label" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the advantage of using the notation 'fig:' in the \label {}?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-superuser" title="Super User"></div><a href="http://superuser.com/questions/696204/how-can-i-manage-the-system-tray-icons" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:3 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I manage the system tray icons?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/15223/is-it-correct-to-use-build-in-the-headline-the-safest-olympic-stadium-build-e" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it correct to use "build" in the headline "The safest Olympic Stadium build ever"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-programmers" title="Programmers Stack Exchange"></div><a href="http://programmers.stackexchange.com/questions/222917/tdd-and-complete-test-coverage-where-exponential-test-cases-are-needed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    TDD and complete test coverage where exponential test cases are needed
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="http://scifi.stackexchange.com/questions/47291/how-do-i-pronounce-sauron" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I pronounce "Sauron"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="http://apple.stackexchange.com/questions/115830/shell-script-for-yesterdays-date" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Shell Script for Yesterday's Date
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/17196/determine-if-land-is-fully-enclosed-by-fences" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Determine if land is fully enclosed by fences
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/47913/is-the-concept-of-authenticated-anonymity-possible" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is the concept of Authenticated Anonymity possible?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/625212/finding-integration-by-substitution" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Finding integration by substitution.
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-networkengineering" title="Network Engineering Stack Exchange"></div><a href="http://networkengineering.stackexchange.com/questions/5678/network-not-participating-in-ospf-does-not-appear-in-the-routing-table" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:496 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Network not participating in OSPF. Does not appear in the routing table
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="http://salesforce.stackexchange.com/questions/23363/will-i-break-a-tos-by-letting-contacts-login-to-a-visualforce-page-i-create" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Will I break a TOS by letting contacts login to a visualforce page I create
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="http://unix.stackexchange.com/questions/107582/how-can-i-find-and-or-print-sudos-lecture-file" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How can I find and/or print sudo's lecture file?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/625277/axiom-of-choice-and-cartesian-products" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Axiom of Choice and Cartesian Products
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-cs" title="Computer Science Stack Exchange"></div><a href="http://cs.stackexchange.com/questions/19459/what-is-combinatorial-explosion" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:419 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is combinatorial explosion?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/20889938/how-come-local-types-always-get-an-even-address" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How come local types always get an even address
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="http://stackoverflow.com/questions/20662171/find-the-kth-eleven-non-free-number?noredirect=1#" class="show-more js-show-more js-gps-track" data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+        <script>
+            StackExchange.ready(function () {
+                var $div = $('#hot-network-questions');
+                $div.find('.js-show-more').click(function () {
+                    $div.find('.js-hidden').show();
+                    $(this).remove();
+                    return false;
+                });
+            });
+        </script>
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="http://stackoverflow.com/feeds/question/20662171" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/20662171/ivc/bf9e');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/20662171/ivc/bf9e" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/about">about</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackexchange.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjc3NiwiZG0iOjQsImZjIjoyODYyLCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&s=hRods5B22XvRBwWIwtIMekcyNF8">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2014 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.12.31.1271
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script type="text/javascript">var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script type="text/javascript">
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('algorithm,data-structures,x-user-registered,x-5000plus-rep');; ados_load(); });         
+</script>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|algorithm|data-structures|']); 
+        _gaq.push(['_setCustomVar', 2, 'accountid', '395885',2]); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>
+            
+
+<script type="text/javascript">var vglnk = vglnk || {api_url: '//api.viglink.com/api', key: '0dff9ade2d1125af6c910069b6d6e155'};</script><script type="text/javascript" async="" src="./algorithm - Find the kth eleven-non-free number - Stack Overflow_files/vglnk.js"></script></body></html>
