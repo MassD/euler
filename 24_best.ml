@@ -26,7 +26,10 @@ let kth_permutation k l =
 	else if num = k then (hd::tl)@rest
 	else hd::(find_kth (k-(num-unum)) (unum/level) (level-1) 1 (List.rev_append rest tl) [])
   in 
-  find_kth k ((factorial n)/n) (n-1) 1 l []
+  let total = factorial n in
+  if k = total then List.rev l
+  else if k > total then raise Not_found
+  else find_kth k (total/n) (n-1) 1 l []
 
 
 let num_string_to_list ns = 
