@@ -38,7 +38,7 @@ let quadratic_primes a_hi b_hi =
   in 
   List.fold_left (
     fun (max,a_max,b_max) b ->
-      let next,a_next= fix_b (0,(-a_hi)) (-a_hi) b in
+      let next,a_next= fix_b (0,(-b_hi)) (-b_hi) b in
       if max < next then next,a_next,b
       else max,a_max,b_max
   ) (0,0,0) b_candidates
